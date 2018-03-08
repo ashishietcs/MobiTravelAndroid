@@ -117,6 +117,7 @@ class Login extends Form implements HandlesEventDispatching {
     Web1 = new Web(this);
     detailsNeeded = false;
     EventDispatcher.registerEventForDelegation(this, "ClickEvent", "Click" );
+    EventDispatcher.registerEventForDelegation(this, "WebEvent","GotText");
   }
   public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params){
     if( component.equals(NextB) && eventName.equals("Click") ){
@@ -129,6 +130,10 @@ class Login extends Form implements HandlesEventDispatching {
     }
     if( component.equals(Next) && eventName.equals("Click") ){
       NextClick();
+      return true;
+    }
+    if( component.equals(Web1) && eventName.equals("GotText") ){
+      GotText(params);
       return true;
     }
     return false;
@@ -164,7 +169,12 @@ class Login extends Form implements HandlesEventDispatching {
     startActivity(new Intent().setClass(this, TicketBooking.class));
   }
   public void sendOTP(){
-    Web1.Url("OTPURL");
+    Web1.Url(getString(R.string.login_url));
+    Web1.Get();
+  }
+
+  public void GotText(Object[] params){
+
   }
   public void registerUser(){
     Web1.Url("registerUrl");
