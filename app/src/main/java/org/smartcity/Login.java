@@ -1,6 +1,9 @@
 package org.smartcity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.appinventor.components.runtime.HandlesEventDispatching;
@@ -15,6 +18,24 @@ import com.google.appinventor.components.runtime.Label;
 import com.google.appinventor.components.runtime.Clock;
 import com.google.appinventor.components.runtime.FirebaseDB;
 import com.google.appinventor.components.runtime.Web;
+import com.google.appinventor.components.runtime.util.YailList;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 class Login extends Form implements HandlesEventDispatching {
   private VerticalArrangement LoginA;
   private TextBox MobileNumber;
@@ -36,6 +57,7 @@ class Login extends Form implements HandlesEventDispatching {
   private FirebaseDB FirebaseDB1;
   private Web Web1;
   private boolean detailsNeeded;
+  private static User globalUser = null;
   protected void $define() {
     this.AlignVertical(2);
     this.AppName("MobiTravel");
@@ -133,7 +155,7 @@ class Login extends Form implements HandlesEventDispatching {
       return true;
     }
     if( component.equals(Web1) && eventName.equals("GotText") ){
-      GotText(params);
+      GotText();
       return true;
     }
     return false;
@@ -141,23 +163,14 @@ class Login extends Form implements HandlesEventDispatching {
   public void NextBClick(){
     if(!(otpNumber.Text().trim().isEmpty())){
       String otpValue = otpNumber.Text().trim();
-      if ( otpValue.compareToIgnoreCase("1234") != 0) {
         Toast.makeText(this,"Not a correct OTP. Try again", Toast.LENGTH_SHORT ).show();
-        return;
-      }
-      registerUser();
-      otpNumber.Enabled(false);
-      MobileNumber.Enabled(false);
-      otpB.Visible(false);
-      NextB.Visible(true);
-      LoginA.Visible(false);
-      SigninA.Visible(true);
-      startActivity(new Intent().setClass(this, TicketBooking.class));
+        registerUser(otpValue);
+        startActivity(new Intent().setClass(this, TicketBooking.class));
     }
   }
   public void otpBClick(){
     if(!(MobileNumber.Text().trim().isEmpty())){
-      sendOTP();
+      sendOTP(MobileNumber.Text());
       otpNumber.Visible(true);
       MobileNumber.Enabled(false);
       otpB.Visible(false);
@@ -168,19 +181,80 @@ class Login extends Form implements HandlesEventDispatching {
     updateUser();
     startActivity(new Intent().setClass(this, TicketBooking.class));
   }
-  public void sendOTP(){
+  public void sendOTP(String mobile_number){
     Web1.Url(getString(R.string.login_url));
-    Web1.Get();
+    globalUser = new User();
+    globalUser.setMobile_number(mobile_number);
+    globalUser.setName("");
+    globalUser.setAddress("");
+    Gson gson = new Gson();
+    String content = gson.toJson(globalUser);
+    Log.i("Web Post Text",  content);
+    //Web1.PostTextWithEncoding(content,"application/json");
+      //List<Object> list = new ArrayList<Object>();
+      //list.add(YailList.makeList(new String[] { "Content-Type", "application/json" }));
+      //Web1.RequestHeaders(YailList.makeList(list));
+    //Web1.PostText(content);
+      new HttpRequestTask().execute();
   }
 
-  public void GotText(Object[] params){
-
+  public void GotText(){
+      if ( globalUser.getStatus().equalsIgnoreCase("Verified")  ){
+          otpNumber.Enabled(false);
+          MobileNumber.Enabled(false);
+          otpB.Visible(false);
+          NextB.Visible(true);
+          LoginA.Visible(false);
+          SigninA.Visible(true);
+          startActivity(new Intent().setClass(this, TicketBooking.class));
+      }
   }
-  public void registerUser(){
-    Web1.Url("registerUrl");
+  public void registerUser(String otp_number){
+      Web1.Url(getString(R.string.login_url)+"/"+globalUser.getId()+"/otp");
+      User u = new User();
+      u.setOtp_number(otp_number);
+      Gson gson = new Gson();
+      String content = gson.toJson(u);
+      Web1.PostText(content);
   }
   public void updateUser(){
-    Web1.Url("registerUrl");
-    Web1.PutText("one");
   }
+
+
+    private class HttpRequestTask extends AsyncTask<Login, Void, User> {
+        Login screen ;
+        @Override
+        protected User doInBackground(Login... params) {
+            screen = params[0];
+            try {
+                final String uri = getString(R.string.login_url);
+                RestTemplate restTemplate = new RestTemplate();
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                HttpEntity<User> entity = new HttpEntity<User>(globalUser, headers);
+
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter ());
+                ResponseEntity<User> result = restTemplate.exchange(uri, HttpMethod.POST, entity, User.class);
+                return result.getBody();
+            } catch (Exception e) {
+                Log.e("MainActivity", e.getMessage(), e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(User u) {
+            if ( u != null ) {
+                globalUser.setId(u.getId());
+                globalUser.setStatus(u.getStatus());
+                globalUser.setName(u.getName());
+                Log.i("web user list ", "" + u.getId());
+            }
+            screen.GotText();
+        }
+
+    }
+
 }

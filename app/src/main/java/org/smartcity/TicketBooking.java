@@ -139,6 +139,7 @@ class TicketBooking extends Form implements HandlesEventDispatching {
       Image1.Picture(path);
       Image1.Visible(true);
       Toast.makeText(TicketBooking.this, "QRCode saved to -> "+path, Toast.LENGTH_SHORT).show();
+      new File(path).delete();
     } catch (WriterException e) {
       e.printStackTrace();
     }
