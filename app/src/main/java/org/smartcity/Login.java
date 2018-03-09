@@ -195,7 +195,9 @@ class Login extends Form implements HandlesEventDispatching {
       //list.add(YailList.makeList(new String[] { "Content-Type", "application/json" }));
       //Web1.RequestHeaders(YailList.makeList(list));
     //Web1.PostText(content);
-      new HttpRequestTask().execute();
+      HttpRequestTask task = new HttpRequestTask();
+      task.screen = this;
+      task.execute();
   }
 
   public void GotText(){
@@ -222,10 +224,9 @@ class Login extends Form implements HandlesEventDispatching {
 
 
     private class HttpRequestTask extends AsyncTask<Login, Void, User> {
-        Login screen ;
+        public Login screen ;
         @Override
         protected User doInBackground(Login... params) {
-            screen = params[0];
             try {
                 final String uri = getString(R.string.login_url);
                 RestTemplate restTemplate = new RestTemplate();
@@ -235,8 +236,9 @@ class Login extends Form implements HandlesEventDispatching {
                 HttpEntity<User> entity = new HttpEntity<User>(globalUser, headers);
 
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter ());
-                ResponseEntity<User> result = restTemplate.exchange(uri, HttpMethod.POST, entity, User.class);
-                return result.getBody();
+                ResponseEntity<User[]> result = restTemplate.exchange(uri, HttpMethod.POST, entity, User[].class);
+                User [] u = result.getBody();
+                return u[0];
             } catch (Exception e) {
                 Log.e("MainActivity", e.getMessage(), e);
             }
