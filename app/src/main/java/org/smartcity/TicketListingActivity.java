@@ -25,10 +25,11 @@ public class TicketListingActivity extends AppCompatActivity implements TaskComp
         customAdapter = new CustomAdapter(getApplicationContext(), ticketList);
         simpleList.setAdapter(customAdapter);
 
+        Ticket ticket = new Ticket();
         HttpTicketRequestTask task = new HttpTicketRequestTask();
         task.screen = this;
-        globalUser.setResourceUrl(getString(R.string.login_url)+ "/"+ globalUser.getId() + "/ticket");
-        task.execute(globalUser);
+        ticket.setResourceUrl(getString(R.string.login_url)+ "/"+ globalUser.getId() + "/ticket");
+        task.execute(ticket);
     }
 
     @Override

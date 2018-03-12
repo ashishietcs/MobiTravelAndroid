@@ -102,7 +102,6 @@ class Login extends Form implements HandlesEventDispatching, TaskCompleteI {
     globalUser.setMobile_number(mobile_number);
     globalUser.setName("");
     globalUser.setAddress("");
-    globalUser.setStatus("Unverified");
     globalUser.setResourceUrl(getString(R.string.login_url));
       HttpLoginRequestTask task = new HttpLoginRequestTask();
       task.screen = this;

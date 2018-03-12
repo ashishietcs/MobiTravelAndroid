@@ -32,7 +32,7 @@ public class DashboardActivity extends AppCompatActivity {
         bookTicketB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent().setClass(getApplicationContext(), TicketBooking.class);
+                Intent in = new Intent().setClass(getApplicationContext(), TicketBookingActivity.class);
                 in.putExtra("userData", data);
                 startActivity(in);
             }

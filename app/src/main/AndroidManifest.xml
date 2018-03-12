@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.smartcity"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
-    
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="21" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-
-
-    <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="21" />
-
-<application
+    <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="Login">
-        <activity android:name="org.smartcity.Login"  android:label="Login" ></activity>
-
-        <activity android:name="org.smartcity.TicketCheck" ></activity>
-        <activity android:name="org.smartcity.WelcomeScreen" android:label="Welcome" >
+        android:label="Login"
+        android:theme="@style/Theme.AppCompat.Light">
+        <activity
+            android:name=".Login"
+            android:label="Login" />
+        <activity android:name=".TicketCheck" />
+        <activity
+            android:name=".WelcomeScreen"
+            android:label="MobiTravel">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="org.smartcity.TicketBooking" ></activity>
-        <activity android:name="org.smartcity.TicketPrint" ></activity>
+        <activity android:name=".TicketBooking" />
+        <activity android:name=".TicketPrint" />
+        <activity android:name=".UpdateProfile" />
+        <activity android:name=".DashboardActivity"/>
+        <activity android:name=".TicketListingActivity" />
+        <activity android:name=".TicketBookingActivity"/>
+    </application>
 
-</application>
 </manifest>

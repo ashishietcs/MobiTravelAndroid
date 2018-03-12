@@ -145,7 +145,7 @@ class TicketListing extends Form implements HandlesEventDispatching, TaskComplet
     HttpTicketRequestTask task = new HttpTicketRequestTask();
     task.screen = this;
     globalUser.setResourceUrl(getString(R.string.login_url)+ "/"+ globalUser.getId() + "/ticket");
-    task.execute(globalUser);
+    //task.execute(globalUser);
     }
 
   @Override

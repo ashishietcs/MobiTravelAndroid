@@ -12,6 +12,16 @@ public class Ticket {
     String persons;
     String valid, id, created;
 
+
+    public String getResourceUrl() {
+        return resourceUrl;
+    }
+
+    public void setResourceUrl(String resourceUrl) {
+        this.resourceUrl = resourceUrl;
+    }
+
+    String resourceUrl;
     public String getUserid() {
         return userid;
     }

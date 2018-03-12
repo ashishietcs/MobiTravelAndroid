@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="login_url"></string>
+    <string name="login_url">https://backend-dot-androidpushnotification-196014.appspot.com/user</string>
+    <string name="location_prompt">Choose a country</string>
+
+    <string-array name="location_arrays">
+        <item>Dwarka</item>
+        <item>Gurgaon</item>
+        <item>Noida</item>
+    </string-array>
 </resources>

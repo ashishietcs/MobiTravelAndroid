@@ -143,7 +143,7 @@ class TicketBooking extends Form implements HandlesEventDispatching, TaskComplet
     HttpTicketCreateRequestTask task = new HttpTicketCreateRequestTask();
     task.screen = this;
     globalUser.setResourceUrl(getString(R.string.login_url)+ "/"+ globalUser.getId() + "/ticket");
-    task.execute(globalUser);
+    //task.execute(globalUser);
     }
   public void validation(){
     isValid = (Boolean) false;
