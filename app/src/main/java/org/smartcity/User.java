@@ -1,13 +1,25 @@
 package org.smartcity;
 
+import java.io.Serializable;
+
 /**
  * Created by ASAHU3 on 3/9/2018.
  */
 
-public class User {
+public class User implements Serializable{
     String created;
     String id;
     String name;
+
+    public String getResourceUrl() {
+        return resourceUrl;
+    }
+
+    public void setResourceUrl(String resourceUrl) {
+        this.resourceUrl = resourceUrl;
+    }
+
+    String resourceUrl;
 
     public String getAddress() {
         return address;
