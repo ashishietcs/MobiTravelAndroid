@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by Ashish Sahu on 3/10/2018.
  */
@@ -23,16 +26,11 @@ public class HttpTicketRequestTask extends AsyncTask<Ticket, Void, Ticket[]> {
             Ticket ticket = params[0];
             final String uri = ticket.getResourceUrl();
             RestTemplate restTemplate = new RestTemplate();
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<Ticket> entity = new HttpEntity<Ticket>(ticket, headers);
-
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            ResponseEntity<Ticket[]> result = restTemplate.exchange(uri, HttpMethod.GET, entity, Ticket[].class);
+            ResponseEntity<Ticket[]> result = restTemplate.getForEntity(uri, Ticket[].class);
             return result.getBody();
         } catch (Exception e) {
-            Log.e("LoginActivity", e.getMessage(), e);
+            Log.e("Login", e.getMessage(), e);
         }
 
         return null;
