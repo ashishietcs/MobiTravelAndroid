@@ -44,6 +44,9 @@ class Login extends Form implements HandlesEventDispatching, TaskCompleteI {
   private Button NextB;
   private boolean detailsNeeded;
   private User globalUser = null;
+  private int MobileNumberLength = 10;
+  private int OTPNumberLength = 4;
+
   protected void $define() {
     this.AlignVertical(2);
     this.AppName("MobiTravel");
@@ -61,6 +64,7 @@ class Login extends Form implements HandlesEventDispatching, TaskCompleteI {
     otpNumber.Hint("OTP Number");
     otpNumber.TextColor(Color.BLACK);
     otpNumber.Visible(false);
+    otpNumber.NumbersOnly(true);
     otpB = new Button(LoginA);
     otpB.Width(LENGTH_FILL_PARENT);
     otpB.Text("Next >>");
@@ -84,12 +88,20 @@ class Login extends Form implements HandlesEventDispatching, TaskCompleteI {
   public void NextBClick(){
     if(!(otpNumber.Text().trim().isEmpty())){
         String otpValue = otpNumber.Text().trim();
-        Toast.makeText(this,"OTP entered "+otpValue, Toast.LENGTH_SHORT ).show();
+        if ( otpValue.length() != OTPNumberLength) {
+          Toast.makeText(this,"Wrong OTP entered. "+ OTPNumberLength + " digits needed." , Toast.LENGTH_SHORT ).show();
+          return;
+        }
         loginUser(otpValue);
     }
   }
   public void otpBClick(){
-    if(!(MobileNumber.Text().trim().isEmpty())){
+    if(!(MobileNumber.Text().trim().isEmpty()) ){
+      String mobileNumber = MobileNumber.Text().trim();
+      if ( mobileNumber.length() != MobileNumberLength) {
+        Toast.makeText(this,"Mobile Number should be of "+MobileNumberLength + " digits.", Toast.LENGTH_SHORT ).show();
+        return;
+      }
       sendOTP(MobileNumber.Text());
       otpNumber.Visible(true);
       MobileNumber.Enabled(false);
