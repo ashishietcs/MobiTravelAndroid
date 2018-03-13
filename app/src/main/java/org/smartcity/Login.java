@@ -122,9 +122,13 @@ class Login extends Form implements HandlesEventDispatching, TaskCompleteI {
 
   public void GotText(){
       if ( globalUser.getStatus().equalsIgnoreCase("Verified")  ){
+        Toast.makeText(this,"Login successful. Enjoy the hassle free MobiTravel.", Toast.LENGTH_SHORT ).show();
         Intent dashboard = new Intent().setClass(this, DashboardActivity.class);
         dashboard.putExtra("userData", globalUser);
         startActivity(dashboard);
+      } else if ( globalUser.getOtp_number() != null ){
+        Toast.makeText(this,"Login unsuccessful. Please provide correct OTP.", Toast.LENGTH_SHORT ).show();
+        return;
       }
   }
   public void loginUser(String otp_number){
@@ -139,7 +143,7 @@ class Login extends Form implements HandlesEventDispatching, TaskCompleteI {
           globalUser.setId(u.getId());
           globalUser.setStatus(u.getStatus());
           globalUser.setName(u.getName());
-          Log.i("web user list ", "" + u.getId());
+          Log.i("user logged in ", "" + u.getId());
       }
   }
 }
