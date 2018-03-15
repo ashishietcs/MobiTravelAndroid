@@ -143,6 +143,7 @@ class Login extends Form implements HandlesEventDispatching, TaskCompleteI {
           globalUser.setId(u.getId());
           globalUser.setStatus(u.getStatus());
           globalUser.setName(u.getName());
+          globalUser.setRole(u.getRole());
           Log.i("user logged in ", "" + u.getId());
       }
   }
