@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 
 public class DashboardActivity extends AppCompatActivity {
@@ -13,7 +14,9 @@ public class DashboardActivity extends AppCompatActivity {
     Button viewHistoryB;
     Button updateProfileB;
     Button validateTicketB;
-
+    Button checkinTicketB;
+    Button checkoutTicketB;
+    LinearLayout adminLayout;
 
     @Override
     public void onBackPressed() {
@@ -27,7 +30,14 @@ public class DashboardActivity extends AppCompatActivity {
         bookTicketB = findViewById(R.id.bookticket);
         viewHistoryB = findViewById(R.id.viewticket);
         updateProfileB = findViewById(R.id.updateprofile);
+        adminLayout = findViewById(R.id.adminLayout);
         validateTicketB = findViewById(R.id.validateTicket);
+        checkinTicketB = findViewById(R.id.checkinTicket);
+        checkoutTicketB = findViewById(R.id.checkoutTicket);
+
+        if (data.getRole() != null && data.getRole().trim().equalsIgnoreCase("admin")) {
+            adminLayout.setVisibility(View.VISIBLE);
+        }
 
         bookTicketB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,5 +74,24 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(in);
             }
         });
+
+        checkinTicketB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent().setClass(getApplicationContext(), TicketCheck.class);
+                in.putExtra("userData", data);
+                startActivity(in);
+            }
+        });
+
+        checkoutTicketB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent().setClass(getApplicationContext(), TicketCheck.class);
+                in.putExtra("userData", data);
+                startActivity(in);
+            }
+        });
+
     }
 }
