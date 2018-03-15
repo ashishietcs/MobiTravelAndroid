@@ -33,6 +33,16 @@ public class User implements Serializable{
     String status;
     String mobile_number;
     String otp_number;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    String role;
     public String getMobile_number() {
         return mobile_number;
     }
