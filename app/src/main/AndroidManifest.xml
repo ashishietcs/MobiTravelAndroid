@@ -22,6 +22,8 @@
             android:name=".Login"
             android:label="Login" />
         <activity android:name=".TicketCheck" />
+        <activity android:name=".TicketCheckin" />
+        <activity android:name=".TicketCheckout" />
         <activity
             android:name=".WelcomeScreen"
             android:label="MobiTravel">
