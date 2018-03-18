@@ -131,7 +131,7 @@ public class TicketBookingActivity extends AppCompatActivity implements TaskComp
             Ticket[] list = (Ticket[]) u;
             if ( list !=  null && list.length != 0) {
                 Ticket t = list[0];
-                generateTicket(t.getId() + t.getCreated());
+                generateTicket(t.getId() );
             }
         }
     }

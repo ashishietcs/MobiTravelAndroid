@@ -10,7 +10,9 @@ import com.google.appinventor.components.runtime.Camera;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-class TicketCheck extends Form implements HandlesEventDispatching {
+import org.springframework.http.HttpMethod;
+
+class TicketCheck extends Form implements HandlesEventDispatching, TaskCompleteI {
   private Label DetailsL;
   private Camera Camera1;
   protected void $define() {
@@ -36,9 +38,27 @@ class TicketCheck extends Form implements HandlesEventDispatching {
         Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
       } else {
         Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+        HttpTicketCheckTask task = new HttpTicketCheckTask();
+        task.screen = this;
+        TicketCheckJob job = new TicketCheckJob();
+        job.setTicketId(result.getContents());
+        job.setMethod(HttpMethod.GET);
+        job.setUrl("https://backend-dot-androidpushnotification-196014.appspot.com/ticket/"+result.getContents());
+        task.execute(job);
       }
     } else {
       super.onActivityResult(requestCode, resultCode, data);
     }
+  }
+
+  @Override
+  public void GotText() {
+
+  }
+
+  @Override
+  public void updateDetails(Object u) {
+    String response = (String) u;
+    Toast.makeText(this, response, Toast.LENGTH_LONG).show();
   }
 }

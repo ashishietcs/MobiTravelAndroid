@@ -10,7 +10,7 @@ public class Ticket {
     String to;
 
     String persons;
-    String valid, id, created;
+    String status, id, created;
 
 
     public String getResourceUrl() {
@@ -24,6 +24,14 @@ public class Ticket {
     String resourceUrl;
     public String getUserid() {
         return userid;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setUserid(String userid) {
@@ -52,14 +60,6 @@ public class Ticket {
 
     public void setNo_persons(String no_persons) {
         this.persons = no_persons;
-    }
-
-    public String getValid() {
-        return valid;
-    }
-
-    public void setValid(String valid) {
-        this.valid = valid;
     }
 
     public String getId() {
