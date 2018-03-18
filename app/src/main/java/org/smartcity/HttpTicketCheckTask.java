@@ -30,7 +30,7 @@ public class HttpTicketCheckTask extends AsyncTask<TicketCheckJob, Void, TicketC
             } else {
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_JSON);
-                HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+                HttpEntity<Ticket> entity = new HttpEntity<Ticket>(ticket.getTicket(), headers);
                 ResponseEntity<TicketCheckJobResponse> result = restTemplate.exchange(uri, ticket.getMethod(), entity, TicketCheckJobResponse.class);
                 return result.getBody();
             }

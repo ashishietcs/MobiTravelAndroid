@@ -44,6 +44,9 @@ class TicketCheckout extends Form implements HandlesEventDispatching, TaskComple
         TicketCheckJob job = new TicketCheckJob();
         job.setTicketId(result.getContents());
         job.setMethod(HttpMethod.PUT);
+        Ticket ticket = new Ticket();
+        ticket.setTo("Gurgaon");
+        job.setTicket(ticket);
         job.setUrl("https://backend-dot-androidpushnotification-196014.appspot.com/ticket/"+result.getContents());
         task.execute(job);
       }

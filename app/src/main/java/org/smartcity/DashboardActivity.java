@@ -78,7 +78,7 @@ public class DashboardActivity extends AppCompatActivity {
         checkinTicketB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent().setClass(getApplicationContext(), TicketCheck.class);
+                Intent in = new Intent().setClass(getApplicationContext(), TicketCheckin.class);
                 in.putExtra("userData", data);
                 startActivity(in);
             }
@@ -87,7 +87,7 @@ public class DashboardActivity extends AppCompatActivity {
         checkoutTicketB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent().setClass(getApplicationContext(), TicketCheck.class);
+                Intent in = new Intent().setClass(getApplicationContext(), TicketCheckout.class);
                 in.putExtra("userData", data);
                 startActivity(in);
             }

@@ -9,6 +9,16 @@ import org.springframework.http.HttpMethod;
 class TicketCheckJob {
     String url, ticketId;
 
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
+
+    Ticket ticket;
+
     public String getTicketId() {
         return ticketId;
     }
