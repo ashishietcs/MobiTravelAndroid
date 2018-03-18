@@ -24,11 +24,16 @@ public class HttpTicketCheckTask extends AsyncTask<TicketCheckJob, Void, TicketC
             final String uri = ticket.getUrl();
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-            ResponseEntity<TicketCheckJobResponse> result = restTemplate.exchange(uri, ticket.getMethod(), entity, TicketCheckJobResponse.class);
-            return result.getBody();
+            if ( HttpMethod.GET.compareTo(ticket.getMethod()) == 0) {
+                ResponseEntity<TicketCheckJobResponse> result = restTemplate.getForEntity(uri,TicketCheckJobResponse.class);
+                return result.getBody();
+            } else {
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+                ResponseEntity<TicketCheckJobResponse> result = restTemplate.exchange(uri, ticket.getMethod(), entity, TicketCheckJobResponse.class);
+                return result.getBody();
+            }
         } catch (Exception e) {
             Log.e("Login", e.getMessage(), e);
         }
