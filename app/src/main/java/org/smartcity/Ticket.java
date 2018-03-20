@@ -11,7 +11,15 @@ public class Ticket {
 
     String persons;
     String status, id, created;
+    String amount;
 
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
 
     public String getResourceUrl() {
         return resourceUrl;

@@ -6,6 +6,7 @@
     <string name="cancel">Cancel</string>
 
     <string-array name="location_arrays">
+        <item>None</item>
         <item>Dwarka</item>
         <item>Gurgaon</item>
         <item>Noida</item>

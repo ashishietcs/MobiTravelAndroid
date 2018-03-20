@@ -32,7 +32,8 @@ public class TicketBookingActivity extends AppCompatActivity implements TaskComp
     EditText passengersText;
     Button bookB, prevB;
     ImageView imageView;
-    private static int QRcodeWidth = 500;
+    EditText tokenAmountText;
+
     User globalUser = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class TicketBookingActivity extends AppCompatActivity implements TaskComp
         imageView = findViewById(R.id.iv);
         bookB.setOnClickListener(this);
         prevB = findViewById(R.id.previousB);
+        tokenAmountText = findViewById(R.id.amountText);
 
         prevB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,13 +75,14 @@ public class TicketBookingActivity extends AppCompatActivity implements TaskComp
         ticket.setFrom(fromSpin.getSelectedItem().toString());
         ticket.setTo(toSpin.getSelectedItem().toString());
         ticket.setNo_persons(passengersText.getText().toString());
+        ticket.setAmount(tokenAmountText.getText().toString());
         task.execute(ticket);
     }
 
 
     public void generateTicket(final String message){
         try {
-            Bitmap bitmap = TextToImageEncode(message);
+            Bitmap bitmap = QRImageUtil.TextToImageEncode(message);
             imageView.setImageBitmap(bitmap);
             imageView.setVisibility(View.VISIBLE);
         } catch (WriterException e) {
@@ -88,38 +91,7 @@ public class TicketBookingActivity extends AppCompatActivity implements TaskComp
 
     }
 
-    private Bitmap TextToImageEncode(String Value) throws WriterException {
-        BitMatrix bitMatrix;
-        try {
-            bitMatrix = new MultiFormatWriter().encode(
-                    Value,
-                    BarcodeFormat.DATA_MATRIX.QR_CODE,
-                    QRcodeWidth, QRcodeWidth, null
-            );
 
-        } catch (IllegalArgumentException Illegalargumentexception) {
-
-            return null;
-        }
-        int bitMatrixWidth = bitMatrix.getWidth();
-
-        int bitMatrixHeight = bitMatrix.getHeight();
-
-        int[] pixels = new int[bitMatrixWidth * bitMatrixHeight];
-
-        for (int y = 0; y < bitMatrixHeight; y++) {
-            int offset = y * bitMatrixWidth;
-
-            for (int x = 0; x < bitMatrixWidth; x++) {
-
-                pixels[offset + x] = bitMatrix.get(x, y) ?
-                        getResources().getColor(R.color.black):getResources().getColor(R.color.white);
-            }
-        }
-        Bitmap bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_4444);
-        bitmap.setPixels(pixels, 0, 500, 0, 0, bitMatrixWidth, bitMatrixHeight);
-        return bitmap;
-    }
     @Override
     public void GotText() {
 

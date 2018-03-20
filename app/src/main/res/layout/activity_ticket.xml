@@ -15,10 +15,10 @@
             android:layout_height="wrap_content">
             <TableRow>
                 <TextView
-                    android:text="From Station"
+                    android:text="From"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="22sp"
                     android:layout_column="1" />
                 <Spinner
                     android:id="@+id/fromSpinner"
@@ -31,10 +31,10 @@
             <TableRow>
 
                 <TextView
-                    android:text="To Station"
+                    android:text="To "
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="22sp"
                     android:layout_column="1" />
 
                 <Spinner
@@ -49,15 +49,31 @@
                     android:text="Passengers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="22sp"
                     android:layout_column="1" />
 
                 <EditText
                     android:id="@+id/passengesText"
-                    android:width="200px"
+                    android:width="150px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1"
+                    />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="Token Amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="26sp"
+                    android:layout_column="1" />
+
+                <EditText
+                    android:id="@+id/amountText"
+                    android:width="150px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100"
                     />
             </TableRow>
 
@@ -80,14 +96,7 @@
                 android:text="Book Ticket" />
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/etqr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:visibility="invisible"/>
-
-        <ImageView
+         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
