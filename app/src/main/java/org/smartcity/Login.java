@@ -47,6 +47,11 @@ class Login extends Form implements HandlesEventDispatching, TaskCompleteI {
   private int MobileNumberLength = 10;
   private int OTPNumberLength = 4;
 
+  @Override
+  public boolean BackPressed() {
+    return true;
+  }
+
   protected void $define() {
     this.AlignVertical(2);
     this.AppName("MobiTravel");
