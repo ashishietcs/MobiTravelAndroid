@@ -55,7 +55,7 @@ class Login extends Form implements HandlesEventDispatching, TaskCompleteI {
   protected void $define() {
     this.AlignVertical(2);
     this.AppName("MobiTravel");
-    this.Title("Login");
+    this.Title("MobiTravel");
     LoginA = new VerticalArrangement(this);
     LoginA.AlignHorizontal(3);
     LoginA.Width(LENGTH_FILL_PARENT);
