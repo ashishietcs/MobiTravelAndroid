@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -30,6 +31,11 @@ public class TicketListingActivity extends AppCompatActivity implements TaskComp
         super.onCreate(savedInstanceState);      setContentView(R.layout.activity_ticketbooking);
         simpleList = (ListView)findViewById(R.id.simpleListView);
         globalUser = (User) getIntent().getSerializableExtra("userData");
+
+        // Add a header to the ListView
+        LayoutInflater inflater = getLayoutInflater();
+        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.listview_header,simpleList,false);
+        simpleList.addHeaderView(header);
 
         Ticket ticket = new Ticket();
         HttpTicketRequestTask task = new HttpTicketRequestTask();
