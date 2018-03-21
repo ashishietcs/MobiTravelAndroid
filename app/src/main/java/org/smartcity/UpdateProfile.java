@@ -34,7 +34,7 @@ class UpdateProfile extends Form implements HandlesEventDispatching, TaskComplet
   private Button Next;
   private Clock Clock1;
   private boolean detailsNeeded;
-  private static User globalUser = null;
+  private User globalUser = null;
 
   @Override
   public void onCreate(Bundle icicle) {
@@ -117,24 +117,22 @@ class UpdateProfile extends Form implements HandlesEventDispatching, TaskComplet
   }
 
   public void PreviousClick(){
-    if ( globalUser.getStatus().equalsIgnoreCase("Verified")  ){
       Intent dashboard = new Intent().setClass(this, DashboardActivity.class);
       dashboard.putExtra("userData", globalUser);
       startActivity(dashboard);
-    }
   }
   public void NextClick(){
     HttpLoginRequestTask task = new HttpLoginRequestTask();
+    globalUser.setResourceUrl(getString(R.string.login_url));
+    globalUser.setAddress(AddressT.Text());
     task.screen = this;
     task.execute(globalUser);
   }
 
   public void GotText(){
-      if ( globalUser.getStatus().equalsIgnoreCase("Verified")  ){
         Intent dashboard = new Intent().setClass(this, DashboardActivity.class);
         dashboard.putExtra("userData", globalUser);
         startActivity(dashboard);
-      }
   }
   public void updateDetails(final Object object ){
       if ( object != null ) {
@@ -142,6 +140,7 @@ class UpdateProfile extends Form implements HandlesEventDispatching, TaskComplet
           globalUser.setId(u.getId());
           globalUser.setStatus(u.getStatus());
           globalUser.setName(u.getName());
+          globalUser.setAddress(u.getAddress());
           Log.i("web user list ", "" + u.getId());
       }
   }
