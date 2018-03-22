@@ -1,13 +1,10 @@
 package org.smartcity;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,7 +56,7 @@ public class CustomAdapter extends ArrayAdapter<Ticket> implements View.OnClickL
         TextView totv = (TextView) view.findViewById(R.id.toTextView);
         totv.setText(ticket.getTo());
         TextView persontv = (TextView) view.findViewById(R.id.personTextView);
-        persontv.setText(ticket.getNo_persons());
+        persontv.setText(ticket.getPersons());
         TextView datetv = (TextView) view.findViewById(R.id.dateTextView);
         datetv.setText(ticket.getCreated());
         return view;

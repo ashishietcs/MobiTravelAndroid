@@ -2,28 +2,15 @@ package org.smartcity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.MediaScannerConnection;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Calendar;
 
 
 public class TicketBookingActivity extends AppCompatActivity implements TaskCompleteI, View.OnClickListener {
@@ -72,7 +59,7 @@ public class TicketBookingActivity extends AppCompatActivity implements TaskComp
         ticket.setResourceUrl(getString(R.string.login_url)+ "/"+ globalUser.getId() + "/ticket");
         ticket.setFrom(fromSpin.getSelectedItem().toString());
         ticket.setTo(toSpin.getSelectedItem().toString());
-        ticket.setNo_persons(passengersText.getText().toString());
+        ticket.setPersons(passengersText.getText().toString());
         ticket.setAmount(tokenAmountText.getText().toString());
         task.execute(ticket);
     }

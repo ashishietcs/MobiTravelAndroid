@@ -1,13 +1,8 @@
 package org.smartcity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.MediaScannerConnection;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.appinventor.components.runtime.Button;
 import com.google.appinventor.components.runtime.Component;
@@ -21,17 +16,8 @@ import com.google.appinventor.components.runtime.TableArrangement;
 import com.google.appinventor.components.runtime.VerticalArrangement;
 import com.google.appinventor.components.runtime.Web;
 import com.google.appinventor.components.runtime.util.YailList;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 class TicketListing extends Form implements HandlesEventDispatching, TaskCompleteI {
@@ -160,7 +146,7 @@ class TicketListing extends Form implements HandlesEventDispatching, TaskComplet
         Ticket t = list[0];
         FromLV.ElementsFromString(t.getFrom());
         ToLV.ElementsFromString(t.getTo());
-        PassengersLV.ElementsFromString(t.getNo_persons());
+        PassengersLV.ElementsFromString(t.getPersons());
       }
     }
 
