@@ -52,11 +52,9 @@ public class TicketBookingActivity extends AppCompatActivity implements TaskComp
         prevB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ( globalUser.getStatus().equalsIgnoreCase("Verified")  ){
                     Intent dashboard = new Intent().setClass(getApplicationContext(), DashboardActivity.class);
                     dashboard.putExtra("userData", globalUser);
                     startActivity(dashboard);
-                }
             }
         });
     }
