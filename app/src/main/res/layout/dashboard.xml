@@ -23,10 +23,11 @@
             android:text="View History" />
 
         <Button
-            android:id="@+id/updateprofile"
+            android:id="@+id/talktous"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Update Profile" />
+            android:text="Talk to US" />
+
 
         <LinearLayout
             android:id="@+id/adminLayout"
@@ -34,6 +35,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="invisible">
+            <Button
+                android:id="@+id/updateprofile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update Profile" />
+
             <Button
                 android:id="@+id/validateTicket"
                 android:layout_width="match_parent"
@@ -53,7 +60,6 @@
                 android:text="Checkout" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 

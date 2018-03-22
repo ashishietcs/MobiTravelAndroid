@@ -7,10 +7,18 @@ import com.google.appinventor.components.runtime.Image;
 import com.google.appinventor.components.runtime.Clock;
 import android.content.Intent;
 
-class WelcomeScreen extends Form implements HandlesEventDispatching {
+public class WelcomeScreen extends Form implements HandlesEventDispatching {
   private Image Image1;
   private Clock Clock1;
+
+  public WelcomeScreen() {
+    super();
+  }
+
   private int welcomeTime;
+
+
+
   protected void $define() {
     this.AppName("MobiTravel");
     this.Title("WelcomeScreen");

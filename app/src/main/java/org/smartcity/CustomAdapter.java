@@ -55,9 +55,9 @@ public class CustomAdapter extends ArrayAdapter<Ticket> implements View.OnClickL
         Ticket ticket = getItem(i);
         view = inflter.inflate(R.layout.activity_listview, null);
         TextView fromtv = (TextView) view.findViewById(R.id.fromTextView);
-        fromtv.setText(ticket.getTo());
+        fromtv.setText(ticket.getFrom());
         TextView totv = (TextView) view.findViewById(R.id.toTextView);
-        totv.setText(ticket.getFrom());
+        totv.setText(ticket.getTo());
         TextView persontv = (TextView) view.findViewById(R.id.personTextView);
         persontv.setText(ticket.getNo_persons());
         TextView datetv = (TextView) view.findViewById(R.id.dateTextView);

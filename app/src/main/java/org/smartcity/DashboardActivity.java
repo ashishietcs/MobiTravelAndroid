@@ -15,6 +15,7 @@ public class DashboardActivity extends AppCompatActivity {
     Button bookTicketB;
     Button viewHistoryB;
     Button updateProfileB;
+    Button talkToUsB;
     Button validateTicketB;
     Button checkinTicketB;
     Button checkoutTicketB;
@@ -47,6 +48,7 @@ public class DashboardActivity extends AppCompatActivity {
         bookTicketB = findViewById(R.id.bookticket);
         viewHistoryB = findViewById(R.id.viewticket);
         updateProfileB = findViewById(R.id.updateprofile);
+        talkToUsB = findViewById(R.id.talktous);
         adminLayout = findViewById(R.id.adminLayout);
         validateTicketB = findViewById(R.id.validateTicket);
         checkinTicketB = findViewById(R.id.checkinTicket);
