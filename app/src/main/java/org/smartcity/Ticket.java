@@ -9,7 +9,7 @@ public class Ticket {
     String from;
     String to;
 
-    String persons;
+    String no_persons;
     String status, id, created;
     String amount;
 
@@ -63,11 +63,11 @@ public class Ticket {
     }
 
     public String getNo_persons() {
-        return persons;
+        return no_persons;
     }
 
     public void setNo_persons(String no_persons) {
-        this.persons = no_persons;
+        this.no_persons = no_persons;
     }
 
     public String getId() {
