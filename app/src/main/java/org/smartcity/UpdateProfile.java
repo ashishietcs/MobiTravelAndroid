@@ -19,7 +19,7 @@ import com.google.appinventor.components.runtime.TextBox;
 import com.google.appinventor.components.runtime.VerticalArrangement;
 import com.google.appinventor.components.runtime.Web;
 
-class UpdateProfile extends Form implements HandlesEventDispatching, TaskCompleteI{
+public class UpdateProfile extends Form implements HandlesEventDispatching, TaskCompleteI{
 
   private TableArrangement SigninA;
   private Label MobileNumberL;
@@ -36,6 +36,9 @@ class UpdateProfile extends Form implements HandlesEventDispatching, TaskComplet
   private boolean detailsNeeded;
   private User globalUser = null;
 
+  public UpdateProfile() {
+    super();
+  }
   @Override
   public void onCreate(Bundle icicle) {
     super.onCreate(icicle);

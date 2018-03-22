@@ -36,7 +36,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-class Login extends Form implements HandlesEventDispatching, TaskCompleteI {
+public class Login extends Form implements HandlesEventDispatching, TaskCompleteI {
   private VerticalArrangement LoginA;
   private TextBox MobileNumber;
   private TextBox otpNumber;
@@ -46,6 +46,10 @@ class Login extends Form implements HandlesEventDispatching, TaskCompleteI {
   private User globalUser = null;
   private int MobileNumberLength = 10;
   private int OTPNumberLength = 4;
+
+  public Login() {
+    super();
+  }
 
   @Override
   public boolean BackPressed() {

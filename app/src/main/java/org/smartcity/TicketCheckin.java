@@ -13,7 +13,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 import org.springframework.http.HttpMethod;
 
-class TicketCheckin extends Form implements HandlesEventDispatching, TaskCompleteI {
+public class TicketCheckin extends Form implements HandlesEventDispatching, TaskCompleteI {
   private Label DetailsL;
   private Camera Camera1;
   protected void $define() {
@@ -24,6 +24,10 @@ class TicketCheckin extends Form implements HandlesEventDispatching, TaskComplet
     Camera1 = new Camera(this);
     new IntentIntegrator(this).initiateScan(); // `this` is the current Activity
 
+  }
+
+  public TicketCheckin() {
+    super();
   }
   public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params){
     return false;
