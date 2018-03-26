@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import org.smartcity.chat.ChatActivity;
+
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -57,6 +59,16 @@ public class DashboardActivity extends AppCompatActivity {
         if (data.getRole() != null && data.getRole().trim().equalsIgnoreCase("admin")) {
             adminLayout.setVisibility(View.VISIBLE);
         }
+
+
+        talkToUsB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent().setClass(getApplicationContext(), ChatActivity.class);
+                in.putExtra("userData", data);
+                startActivity(in);
+            }
+        });
 
         bookTicketB.setOnClickListener(new View.OnClickListener() {
             @Override
