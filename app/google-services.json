@@ -43,9 +43,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:991196050611:android:c775d8383b2e70e6",
+        "mobilesdk_app_id": "1:991196050611:android:8394bc775d63edaa",
         "android_client_info": {
-          "package_name": "org.smartcity.chat"
+          "package_name": "org.smartcity"
         }
       },
       "oauth_client": [
